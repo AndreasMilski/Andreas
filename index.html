@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover, user-scalable=no">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <meta name="apple-mobile-web-app-title" content="Helfer">
+  <meta name="theme-color" content="#111318">
+  <title>Helfer</title>
+  <link rel="manifest" href="manifest.webmanifest">
+  <link rel="apple-touch-icon" href="icons/apple-touch-icon.png">
+  <link rel="icon" type="image/png" href="icons/icon-192.png">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <header class="topbar">
+    <h1 id="title">Zähler</h1>
+  </header>
+
+  <main>
+    <!-- ZÄHLER -->
+    <section id="view-counter" class="view active">
+      <div id="counter-list" class="list"></div>
+      <button id="add-counter" class="btn-add">+ Neuer Zähler</button>
+    </section>
+
+    <!-- STOPPUHR -->
+    <section id="view-stopwatch" class="view">
+      <div class="big-time" id="sw-display">00:00,00</div>
+      <div class="controls">
+        <button id="sw-left" class="round secondary">Runde</button>
+        <button id="sw-right" class="round start">Start</button>
+      </div>
+      <ol id="sw-laps" class="laps"></ol>
+    </section>
+
+    <!-- COUNTDOWN -->
+    <section id="view-timer" class="view">
+      <div id="tm-setup">
+        <div class="pickers">
+          <label>Std<input id="tm-h" type="number" inputmode="numeric" min="0" max="23" value="0"></label>
+          <label>Min<input id="tm-m" type="number" inputmode="numeric" min="0" max="59" value="5"></label>
+          <label>Sek<input id="tm-s" type="number" inputmode="numeric" min="0" max="59" value="0"></label>
+        </div>
+        <div class="presets">
+          <button data-sec="60">1 Min</button>
+          <button data-sec="180">3 Min</button>
+          <button data-sec="300">5 Min</button>
+          <button data-sec="600">10 Min</button>
+          <button data-sec="900">15 Min</button>
+          <button data-sec="1800">30 Min</button>
+        </div>
+      </div>
+      <div id="tm-run" hidden>
+        <svg class="ring" viewBox="0 0 120 120">
+          <circle class="ring-bg" cx="60" cy="60" r="54"></circle>
+          <circle class="ring-fg" id="tm-ring" cx="60" cy="60" r="54"></circle>
+        </svg>
+        <div class="big-time ring-time" id="tm-display">05:00</div>
+      </div>
+      <div class="controls">
+        <button id="tm-left" class="round secondary">Abbrechen</button>
+        <button id="tm-right" class="round start">Start</button>
+      </div>
+      <label class="toggle"><input type="checkbox" id="tm-wake" checked> Bildschirm wach halten</label>
+    </section>
+  </main>
+
+  <nav class="tabbar">
+    <button data-view="counter" class="active"><span class="ico">#</span>Zähler</button>
+    <button data-view="stopwatch"><span class="ico">⏱</span>Stoppuhr</button>
+    <button data-view="timer"><span class="ico">⏳</span>Timer</button>
+  </nav>
+
+  <div id="alarm" class="alarm" hidden>
+    <div class="alarm-box">
+      <div class="alarm-title">Zeit ist um!</div>
+      <button id="alarm-stop" class="round start">OK</button>
+    </div>
+  </div>
+
+  <script src="app.js"></script>
+</body>
+</html>

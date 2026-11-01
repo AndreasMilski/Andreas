@@ -1,0 +1,212 @@
+:root {
+  --bg: #111318;
+  --card: #1c1f26;
+  --card2: #262a33;
+  --text: #f2f3f5;
+  --muted: #8b90a0;
+  --accent: #34c759;
+  --danger: #ff453a;
+  --orange: #ff9f0a;
+  --safe-top: env(safe-area-inset-top);
+  --safe-bottom: env(safe-area-inset-bottom);
+}
+
+* { box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
+
+html, body {
+  margin: 0;
+  height: 100%;
+  background: var(--bg);
+  color: var(--text);
+  font-family: -apple-system, BlinkMacSystemFont, "SF Pro Text", system-ui, sans-serif;
+  -webkit-user-select: none;
+  user-select: none;
+  overscroll-behavior: none;
+}
+
+button { font: inherit; color: inherit; border: 0; background: none; cursor: pointer; }
+input { font: inherit; }
+
+.topbar {
+  padding: calc(var(--safe-top) + 12px) 20px 8px;
+}
+.topbar h1 { margin: 0; font-size: 34px; font-weight: 700; }
+
+main {
+  padding: 8px 16px calc(var(--safe-bottom) + 90px);
+}
+
+.view { display: none; }
+.view.active { display: block; }
+
+/* ---------- Tabbar ---------- */
+.tabbar {
+  position: fixed; left: 0; right: 0; bottom: 0;
+  display: flex;
+  background: rgba(28, 31, 38, 0.92);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border-top: 1px solid #2c303a;
+  padding-bottom: var(--safe-bottom);
+}
+.tabbar button {
+  flex: 1;
+  display: flex; flex-direction: column; align-items: center; gap: 2px;
+  padding: 8px 0 6px;
+  font-size: 11px;
+  color: var(--muted);
+}
+.tabbar button .ico { font-size: 22px; line-height: 1.1; }
+.tabbar button.active { color: var(--accent); }
+
+/* ---------- Zähler ---------- */
+.list { display: flex; flex-direction: column; gap: 12px; }
+
+.counter {
+  background: var(--card);
+  border-radius: 16px;
+  padding: 14px;
+}
+.counter-head {
+  display: flex; align-items: center; gap: 8px;
+  margin-bottom: 8px;
+}
+.counter-name {
+  flex: 1;
+  background: transparent; border: 0; color: var(--text);
+  font-size: 17px; font-weight: 600;
+  padding: 4px 0;
+  -webkit-user-select: text; user-select: text;
+}
+.counter-name:focus { outline: none; border-bottom: 1px solid var(--muted); }
+.icon-btn {
+  width: 34px; height: 34px; border-radius: 10px;
+  background: var(--card2); color: var(--muted);
+  font-size: 16px;
+}
+.counter-body {
+  display: flex; align-items: center; justify-content: space-between; gap: 12px;
+}
+.counter-value {
+  font-size: 54px; font-weight: 300;
+  font-variant-numeric: tabular-nums;
+  text-align: center; flex: 1;
+}
+.step {
+  width: 72px; height: 72px; border-radius: 50%;
+  font-size: 36px; font-weight: 400;
+  background: var(--card2);
+}
+.step.plus { background: var(--accent); color: #fff; }
+.step:active, .round:active, .icon-btn:active, .presets button:active { transform: scale(0.94); opacity: 0.85; }
+
+.btn-add {
+  width: 100%;
+  margin-top: 14px;
+  padding: 16px;
+  border-radius: 14px;
+  background: var(--card);
+  color: var(--accent);
+  font-size: 17px; font-weight: 600;
+}
+
+/* ---------- Gemeinsam: Zeit + Buttons ---------- */
+.big-time {
+  font-size: 72px; font-weight: 200;
+  text-align: center;
+  font-variant-numeric: tabular-nums;
+  letter-spacing: -1px;
+  margin: 40px 0 30px;
+}
+.controls {
+  display: flex; justify-content: space-between;
+  padding: 0 12px;
+}
+.round {
+  width: 88px; height: 88px; border-radius: 50%;
+  font-size: 14px; font-weight: 500;
+  box-shadow: 0 0 0 3px var(--bg), 0 0 0 5px currentColor;
+}
+.round.secondary { background: #333742; color: #e5e6ea; }
+.round.secondary:disabled { opacity: 0.4; }
+.round.start { background: rgba(52, 199, 89, 0.25); color: var(--accent); }
+.round.stop { background: rgba(255, 69, 58, 0.25); color: var(--danger); }
+.round.pause { background: rgba(255, 159, 10, 0.25); color: var(--orange); }
+
+/* ---------- Stoppuhr ---------- */
+.laps {
+  list-style: none; margin: 28px 0 0; padding: 0;
+  border-top: 1px solid #2c303a;
+}
+.laps li {
+  display: flex; justify-content: space-between;
+  padding: 12px 4px;
+  border-bottom: 1px solid #2c303a;
+  font-variant-numeric: tabular-nums;
+  font-size: 17px;
+}
+.laps li.best { color: var(--accent); }
+.laps li.worst { color: var(--danger); }
+
+/* ---------- Timer ---------- */
+.pickers {
+  display: flex; justify-content: center; gap: 12px;
+  margin: 30px 0 20px;
+}
+.pickers label {
+  display: flex; flex-direction: column; align-items: center; gap: 6px;
+  color: var(--muted); font-size: 13px;
+}
+.pickers input {
+  width: 88px; padding: 12px 0;
+  text-align: center; font-size: 40px; font-weight: 300;
+  background: var(--card); color: var(--text);
+  border: 0; border-radius: 14px;
+  -webkit-user-select: text; user-select: text;
+}
+.pickers input:focus { outline: 2px solid var(--accent); }
+.presets {
+  display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px;
+  margin-bottom: 30px;
+}
+.presets button {
+  padding: 12px 0; border-radius: 12px;
+  background: var(--card); font-size: 15px;
+}
+
+#tm-run { position: relative; width: 280px; height: 280px; margin: 20px auto 30px; }
+.ring { width: 100%; height: 100%; transform: rotate(-90deg); }
+.ring-bg { fill: none; stroke: var(--card2); stroke-width: 6; }
+.ring-fg {
+  fill: none; stroke: var(--orange); stroke-width: 6; stroke-linecap: round;
+  stroke-dasharray: 339.292; stroke-dashoffset: 0;
+  transition: stroke-dashoffset 0.25s linear;
+}
+.ring-time {
+  position: absolute; inset: 0;
+  display: flex; align-items: center; justify-content: center;
+  margin: 0; font-size: 56px;
+}
+
+.toggle {
+  display: flex; align-items: center; justify-content: center; gap: 8px;
+  margin-top: 30px; color: var(--muted); font-size: 14px;
+}
+.toggle input { width: 18px; height: 18px; accent-color: var(--accent); }
+
+/* ---------- Alarm ---------- */
+.alarm {
+  position: fixed; inset: 0;
+  background: rgba(0, 0, 0, 0.75);
+  display: flex; align-items: center; justify-content: center;
+  z-index: 10;
+}
+.alarm[hidden] { display: none; }
+.alarm-box {
+  background: var(--card); border-radius: 22px;
+  padding: 30px 40px;
+  display: flex; flex-direction: column; align-items: center; gap: 24px;
+  animation: pulse 1s ease-in-out infinite;
+}
+.alarm-title { font-size: 26px; font-weight: 600; }
+@keyframes pulse { 50% { transform: scale(1.04); } }
